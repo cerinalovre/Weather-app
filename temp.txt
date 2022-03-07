@@ -1,3 +1,0 @@
-{'coord': {'lon': 16.4392, 'lat': 43.5089}, 'weather': [{'id': 803, 'main': 'Clouds', 'description': 'broken clouds', 'icon': '04n'}], 'base': 'stations', 'main': {'temp': 
-280.21, 'feels_like': 276.79, 'temp_min': 279.18, 'temp_max': 280.21, 'pressure': 1012, 'humidity': 39}, 'visibility': 10000, 'wind': {'speed': 5.66, 'deg': 30}, 'clouds': 
-{'all': 75}, 'dt': 1646591372, 'sys': {'type': 1, 'id': 6387, 'country': 'HR', 'sunrise': 1646544171, 'sunset': 1646585314}, 'timezone': 3600, 'id': 3190261, 'name': 'Split', 'cod': 200}

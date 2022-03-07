@@ -1,13 +1,11 @@
 import requests
-import config # Not necessary when 'config.api_key' is replaced with an actual API key
 from tkinter import *
 from tkinter import font
 import tkinter.messagebox
-from PIL import Image, ImageTk
 import datetime
 
 
-API_KEY = config.api_key # API key available at https://openweathermap.org/, switch 'config.api_key' with an API key in string format.
+API_KEY = 'c19d186a0add032f9dc1b6f86036db84'
 BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
 
 
@@ -106,13 +104,11 @@ def display_selected(city):
     else:
         tkinter.messagebox.showerror(title='Error', message='An error ocurred')
         root.quit()
-        
-  
+         
 drop = OptionMenu(top_frame, clicked, *cities, command=display_selected)
 drop_font = font.Font(size=12, weight='bold')
 drop.config(width=15, height=2, font=drop_font)
 drop.grid(row=0, column=0, pady=30)
-
 
 root.mainloop()
 
