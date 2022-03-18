@@ -35,35 +35,7 @@ cities = [
     "Pula"
 ]
 
-
-def display_selected(city):
-    for widget in bottom_frame.winfo_children(): # Clearing the bottom frame every time a new city is selected to
-        widget.destroy()                         # prevent text being displayed on top of the previous one.
-
-    city = clicked.get()
-    request_url = f'{BASE_URL}?appid={API_KEY}&q={city}'
-    response = requests.get(request_url)
-
-    if response.status_code == 200:
-        data = response.json()
-       
-        city_label = Label(bottom_frame, text=city, font=IMPORTANT_FONT)
-        city_label.grid(row=0, sticky=W)
-        temp_label = Label(bottom_frame, text=str(round(data['main']['temp']-273.15)) + '°C', font=IMPORTANT_FONT)
-        temp_label.grid(row=1, sticky=W)
-        humidity_label = Label(bottom_frame, text='Humidity: ' + str(data['main']['humidity']) + '%', font=NORMAL_FONT)
-        humidity_label.grid(row=2, sticky=W)
-        pressure_label = Label(bottom_frame, text='Pressure: ' + str(data['main']['pressure']) + ' hPa', font=NORMAL_FONT)
-        pressure_label.grid(row=3, sticky=W)
-        visibility_label = Label(bottom_frame, text='Visibility: ' + str(data['visibility']//1000) + ' km', font=NORMAL_FONT)
-        visibility_label.grid(row=4, sticky=W)
-        weather_label = Label(bottom_frame, text='Weather: ' + data['weather'][0]['description'], font=NORMAL_FONT)
-        weather_label.grid(row=0, column=1, padx=30)
-        padding_label = Label(bottom_frame, text='')
-        padding_label.grid(row=5, pady=30)
-
-        weather_type = data['weather'][0]['id']
-
+def weather_icon_type(weather_type):
         if weather_type>199 and weather_type<233:
             icon_url = 'weather_icons\thunder.png'
 
@@ -94,6 +66,43 @@ def display_selected(city):
         elif weather_type == 803 or weather_type == 804:
             icon_url = 'weather_icons\clouds.png'
 
+        return icon_url
+
+
+def display(city):
+    for widget in bottom_frame.winfo_children(): # Clearing the bottom frame every time a new city is selected to
+        widget.destroy()                         # prevent text being displayed on top of the previous one.
+
+    city = clicked.get()
+    request_url = f'{BASE_URL}?appid={API_KEY}&q={city}'
+    response = requests.get(request_url)
+
+    if response.status_code == 200:
+        data = response.json()
+       
+        city_label = Label(bottom_frame, text=city, font=IMPORTANT_FONT)
+        city_label.grid(row=0, sticky=W)
+
+        temp_label = Label(bottom_frame, text=str(round(data['main']['temp']-273.15)) + '°C', font=IMPORTANT_FONT)
+        temp_label.grid(row=1, sticky=W)
+
+        humidity_label = Label(bottom_frame, text='Humidity: ' + str(data['main']['humidity']) + '%', font=NORMAL_FONT)
+        humidity_label.grid(row=2, sticky=W)
+
+        pressure_label = Label(bottom_frame, text='Pressure: ' + str(data['main']['pressure']) + ' hPa', font=NORMAL_FONT)
+        pressure_label.grid(row=3, sticky=W)
+
+        visibility_label = Label(bottom_frame, text='Visibility: ' + str(data['visibility']//1000) + ' km', font=NORMAL_FONT)
+        visibility_label.grid(row=4, sticky=W)
+
+        weather_label = Label(bottom_frame, text='Weather: ' + data['weather'][0]['description'], font=NORMAL_FONT)
+        weather_label.grid(row=0, column=1, padx=30)
+
+        padding_label = Label(bottom_frame, text='')
+        padding_label.grid(row=5, pady=30)
+
+        weather_type = data['weather'][0]['id']
+        icon_url = weather_icon_type(weather_type)
         photo = PhotoImage(file=icon_url)
         icon_label = Label(bottom_frame, image=photo, borderwidth=2, relief="solid")
         icon_label.image = photo # Keeping a reference to the object, otherwise icon is blank
@@ -106,7 +115,7 @@ def display_selected(city):
 clicked = StringVar()
 clicked.set("Choose a city")
          
-drop = OptionMenu(top_frame, clicked, *cities, command=display_selected)
+drop = OptionMenu(top_frame, clicked, *cities, command=display)
 drop.config(width=15, height=2, font=DROPDOWN_FONT)
 drop.grid(row=0, column=0, pady=30)
 
