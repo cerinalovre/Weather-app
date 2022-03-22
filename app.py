@@ -36,29 +36,29 @@ cities = [
 ]
 
 def weather_icon_type(weather_type):
-        if weather_type>199 and weather_type<233:
+        if weather_type > 199 and weather_type < 233:
             icon_url = 'weather_icons\thunder.png'
 
-        elif weather_type>299 and weather_type<322:
+        elif weather_type > 299 and weather_type < 322:
             icon_url = 'weather_icons\light_rain.png'
 
-        elif weather_type>499 and weather_type<532:
+        elif weather_type > 499 and weather_type < 532:
             icon_url = 'weather_icons\heavy_rain.png'
 
-        elif weather_type>599 and weather_type<623:
+        elif weather_type > 599 and weather_type < 623:
             icon_url = 'weather_icons\snow.png'
         
-        elif weather_type>700 and weather_type<782:
+        elif weather_type > 700 and weather_type < 782:
             icon_url = 'weather_icons\fog.png'
 
         elif weather_type == 800:
-            if CURRENT_TIME.hour>19 and CURRENT_TIME.hour<6:
+            if CURRENT_TIME.hour > 19 and CURRENT_TIME.hour < 6:
                 icon_url = 'weather_icons\clear_moon.png'
             else:
                 icon_url = 'weather_icons\clear_sun.png'
 
         elif weather_type == 801 or weather_type == 802:
-            if CURRENT_TIME.hour>19 and CURRENT_TIME.hour<6:
+            if CURRENT_TIME.hour > 19 and CURRENT_TIME.hour < 6:
                 icon_url = 'weather_icons\clouds_night.png'
             else:
                 icon_url = 'weather_icons\clouds_day.png'
@@ -83,7 +83,7 @@ def display(city):
         city_label = Label(bottom_frame, text=city, font=IMPORTANT_FONT)
         city_label.grid(row=0, sticky=W)
 
-        temp_label = Label(bottom_frame, text=str(round(data['main']['temp']-273.15)) + '°C', font=IMPORTANT_FONT)
+        temp_label = Label(bottom_frame, text=str(round(data['main']['temp'] - 273.15)) + '°C', font=IMPORTANT_FONT)
         temp_label.grid(row=1, sticky=W)
 
         humidity_label = Label(bottom_frame, text='Humidity: ' + str(data['main']['humidity']) + '%', font=NORMAL_FONT)
@@ -92,7 +92,7 @@ def display(city):
         pressure_label = Label(bottom_frame, text='Pressure: ' + str(data['main']['pressure']) + ' hPa', font=NORMAL_FONT)
         pressure_label.grid(row=3, sticky=W)
 
-        visibility_label = Label(bottom_frame, text='Visibility: ' + str(data['visibility']//1000) + ' km', font=NORMAL_FONT)
+        visibility_label = Label(bottom_frame, text='Visibility: ' + str(data['visibility'] // 1000) + ' km', font=NORMAL_FONT)
         visibility_label.grid(row=4, sticky=W)
 
         weather_label = Label(bottom_frame, text='Weather: ' + data['weather'][0]['description'], font=NORMAL_FONT)
