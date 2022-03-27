@@ -5,5 +5,4 @@ There are 7 major Croatian cities that can be selected from the dropdown menu.
 
 Dependencies: Requests module
 
-![Weather app](weather_icons/weather_screen.jpg)
 
